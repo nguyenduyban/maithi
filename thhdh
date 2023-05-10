@@ -1,0 +1,87 @@
+1. Trong hệ thống Linux user nào có quyền cao nhất
+A. User administrator
+B. User root ( tài khoản root )
+C. User admin
+D. User có UID=0
+
+2. Lệnh dùng để xem tập tin văn bản?
+A. Cat
+B. Less
+C. More
+D. Cả 3 lệnh trên ( nếu không có chọn cả 3 thì chọn “ Cat “)
+
+3. Lệnh cho biết độ dài của dòng dài nhất trong tập tin?
+wc -L <tên tập tin>   
+
+4. Lệnh xóa tập tin?
+rm <tên tập tin> hoặc sudo rm -f <tên tập tin>
+
+5. Lệnh sao chép?
+cp <tập tin nguồn> <tập tin đích> ( sao chép tập tin ) 
+cp -r <thư mục nguồn> <thư mục đích> ( Sao chép toàn bộ nội dung của thư mục )
+
+6. Lệnh chuyển thư mục?
+cd ( di chuyển sang thư mục )
+cd ~/Desktop ( Di chuyển sang thư mục Desktop )
+cd.. ( Di chuyển sang thư mục cha , ngay trên thư mục hiện hành )
+
+
+
+
+
+7. Lệnh phân quyền?
+r : quyền đọc
+x : quyền thực hiện
+w : quyền ghi
+chmod u+x file ( giao + quyền thực hiện ( x ) tập tin file cho người dùng ( u )
+chmod g-w file ( rút (-) quyền ghi (w) file của nhóm ( g )
+chmod o-r file ( rút ( - ) quyền đọc ( r ) và ghi (w) file cho mọi người ( a )
+chmod a+rw file ( giao + quyền đọc ( r ) và ghi (w) file cho mọi người (a )
+chmod -R a+rx thư mục ( giao + quyền đọc ( r ) và vào bên trong thư mục ( x ) thư mục, kể cả tất cả các thư mục con của nó ( -R ), cho tất cả mọi người ( a ) 
+chmod u=rwx,g=rx,o=x folder ( người dùng có quyền đọc, ghi và thực thi, nhóm người dùng có quyền đọc và thực thi, và các người dùng khác chỉ có quyền thực thi )
+
+8 . Làm sao xem user nào đang login vào hệ thống?
+who -u ( hiển thị người dùng đang đăng nhập )
+who -q ( chỉ hiển thị số lượng người dùng )
+
+9 . Lệnh định dạng file hệ thống? (tương đương lệnh format trong windows)
+mkfs -t <loại tập tin> <đường dẫn đến thiết bị lưu trữ> ( (-t) là định dạng tập tin mà bạn muốn tạo (ví dụ: ext4, ntfs, vfat, etc.) , Đường dẫn đến thiết bị lưu trữ là đường dẫn đến phân vùng hoặc ổ đĩa mà bạn muốn định dạng., )
+vd : định dạng fat32
+mkfs -t vfat /dev/sdb1
+
+10. Lệnh để sao lưu tất cả thư mục gốc của người dùng?
+tar -cvfz <tên file>.tar.gz /path/to/user/home
+
+11 . Lệnh tắt hệ điều hành Linux / khởi động lại Linux?
+sudo poweroff ( tắt hệ thống ngay lập tức )
+sudo reboot hoặc Shutdown -h now ( khởi động lại linux ngay lập tức )
+12 . Đặc điểm của tập tin thông thường và tập tin ẩn?
+Tập tin thông thường có tên dễ đọc và truy cập được, thường được sử dụng để lưu trữ dữ liệu, tài liệu hoặc chương trình. 
+Tập tin ẩn có tên bắt đầu bằng dấu chấm (.), không hiển thị khi sử dụng công cụ truy cập tập tin thông thường, thường được sử dụng để lưu trữ các cấu hình hoặc dữ liệu quan trọng của hệ thống.
+
+13. Định hướng xuất thông tin?
+
+Có nhiều cách để xuất thông tin trong Linux, bao gồm sử dụng các lệnh dòng lệnh, tệp log, các công cụ quản lý hệ thống, script, phần mềm giám sát và quản lý hệ thống, công cụ đồ họa và các công cụ đo lường hiệu suất hệ thống. Các cách này có thể được sử dụng để giám sát và quản lý hệ thống Linux một cách hiệu quả.
+
+14 . Làm sao để xác định độ ưu tiên của tiến trình?
+Độ ưu tiên của một tiến trình trong Linux được xác định bởi nice value, là một số nguyên từ -20 đến 19. Nice value càng thấp thì tiến trình được ưu tiên sử dụng tài nguyên hệ thống hơn. Bạn có thể sử dụng lệnh "top" để xem nice value của các tiến trình đang chạy, và sử dụng lệnh "renice" để thay đổi nice value của một tiến trình đã tồn tại.
+15. Lệnh nào được sử dụng để xem danh sách của tất cả các tập tin bên trong hdhlinux.rpm (.rpm là gói trong /home /cntt) ?
+rpm -qlp /home/cntt/hdhlinux.rpm
+
+16. Lệnh liệt kê tập tin, thư mục?
+ls -l hoặc dir -l ( liệt kê danh mục tập tin trong thư mục )
+ls -a hoặc dir -a ( liệt kê tất cả tập tin )
+ls -d hoặc dir -d ( liệt kê tên các thư mục hiện hành )
+ls -l | more ( liệt kê theo từng trang một )
+ls -t ( xếp lại các tập tin theo ngày đã tạo )
+ls -s hoặc dir -s ( xếp lại theo kích thước )
+
+
+17 . Làm sao để hiển thị thông tin về tất cả các tiến trình trên hệ thống với danh sách đầy đủ?
+Sử dụng lệnh : ps aux
+
+18. Bạn cần phải tìm kiếm toàn bộ cấu trúc thư mục một tập tin cụ thể, làm thế nào trong khi thực hiện điều này mà vẫn có thể chạy các lệnh khác trong khi lệnh find vẫn đang tìm kiếm tậpp tin của bạn?
+Để tìm kiếm toàn bộ cấu trúc thư mục một tập tin cụ thể trong khi vẫn có thể chạy các lệnh khác trong khi lệnh find ( find / -name "filename" & ) đang tìm kiếm, bạn có thể sử dụng một cửa sổ terminal khác để chạy các lệnh khác trong khi lệnh find đang chạy trên cửa sổ terminal hiện tại. Bạn cũng có thể sử dụng tiến trình nền để chạy lệnh find và chạy các lệnh khác trên cửa sổ terminal hiện tại.
+
+19. Thư mục lưu trữ các tập tin chương trình được cài đặt trong hệ thống?
+Trên hệ thống Linux, thư mục lưu trữ các tập tin chương trình được cài đặt thường là "/usr/bin", "/usr/local/bin", "/opt" hoặc "/bin". Ngoài ra, các thư mục khác như "/sbin" và "/usr/sbin" chứa các tập tin chương trình dành cho người quản trị hệ thống.
