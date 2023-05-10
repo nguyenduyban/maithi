@@ -1,0 +1,132 @@
+#include <iostream>
+#include <queue>
+using namespace std;
+const int MAX = 50;
+
+struct Node {
+	int dinhke, trongso;
+	Node* link;
+};
+typedef struct Node* NodePtr;
+
+struct DanhSachKe {
+	NodePtr dsk[MAX];
+	int n;
+};
+void inIt(DanhSachKe& d);
+void insertLast(NodePtr& l, int dinhke, int trongso);
+bool docDanhSachKe(const char* nameFile, DanhSachKe& d);
+void xuatDanhSachKe(DanhSachKe d);
+int demNode(NodePtr x);
+bool ghiFile(const char* nameFile, DanhSachKe& d);
+
+
+#include"ThuVienDanhSachKe.h"
+void inIt(DanhSachKe& d) {
+	for (int i = 0; i < d.n; i++)
+	{
+		d.dsk[i] = NULL;
+	}
+}
+
+void insertLast(NodePtr& l, int dinhke, int trongso) {
+	NodePtr p = new Node;
+	p->dinhke = dinhke;
+	p->trongso = trongso;
+	p->link = NULL;
+	if (l == NULL) {
+		l = p;
+	}
+	else {
+		NodePtr q = l;
+		while (q->link != NULL)
+		{
+			q = q->link;
+		}
+		q->link = p;
+	}
+}
+
+bool docDanhSachKe(const char* nameFile, DanhSachKe& d) {
+	FILE* f;
+	fopen_s(&f, nameFile, "rt");
+	if (f == NULL) {
+		return false;
+	}
+	fscanf_s(f, "%d", &d.n);
+	inIt(d);
+	for (int i = 0; i < d.n; i++)
+	{
+		int sodinhke;
+		fscanf_s(f, "%d", &sodinhke);
+		for (int j = 0; j < sodinhke; j++)
+		{
+			int dinhke, trongso;
+			fscanf_s(f, "%d", &dinhke);
+			fscanf_s(f, "%d", &trongso);
+			insertLast(d.dsk[i], dinhke, trongso);
+		}
+	}
+}
+
+void xuatDanhSachKe(DanhSachKe d) {
+	for (int i = 0; i < d.n; i++)
+	{
+		NodePtr q = d.dsk[i];
+		cout << i  << " : ";
+		while (q != NULL){
+			cout << q->dinhke  << " " << q->trongso << "  ";
+			q = q->link;
+		}
+		cout << endl;
+	}
+}
+int demNode(NodePtr x) {
+	int dem = 0;
+	while (x!=NULL)
+	{
+		dem++;
+		x = x->link;
+	}
+	return dem;
+ }
+
+bool ghiFile(const char* nameFile, DanhSachKe & d) {
+	FILE* f;
+	fopen_s(&f,nameFile, "wt");
+	if (f == NULL)
+		return false;
+	fprintf_s(f, "%d", d.n);
+	for (int i = 0; i < d.n; i++){
+		NodePtr p = d.dsk[i];
+		int m = demNode(p);
+		fprintf_s(f, "\n%d:", m);
+		while (p!=NULL){
+				fprintf_s(f, "-->%d %d", p->dinhke, p->trongso);
+			p = p->link;
+		}
+	}
+	fclose(f);
+	return true;
+}
+
+#include "ThuVienDanhSachKe.h"
+
+int main() {
+	DanhSachKe d;
+	if (docDanhSachKe("Text.txt", d) == false) {
+		cout << "KHONG MO DUOC FILE" << endl;
+	}
+	else {
+		xuatDanhSachKe(d);
+	}
+
+	cout << "----------------------------------------------"<<endl;
+
+	if (ghiFile("ghiDanhSachKe.txt", d) == true) 
+		cout << "\n Ghi File thanh cong.";
+	else
+		cout << "Ghi file Khong Thanh Cong !!!!!!!!!!!!!";
+	
+	return 0;
+}
