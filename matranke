@@ -1,0 +1,71 @@
+#include <iostream>
+using namespace std;
+const int MAX = 100;
+#include <fstream>
+struct MaTranKe{
+	int mtk[MAX][MAX];
+	int n;
+};
+
+bool docMaTranKe(const char* NameFile, MaTranKe& x);
+void xuatMaTranKe(MaTranKe x);
+bool ghiMaTranKe(const char* NameFile, MaTranKe x);
+
+#include "ThuVien.h"
+
+
+bool docMaTranKe(const char* NameFile, MaTranKe& x) {
+	FILE* f;
+	fopen_s(&f,NameFile, "rt");
+	if (f == NULL) return false;
+	fscanf_s(f, "%d", &x.n);
+	for (int i = 0; i < x.n; i++){
+		for (int j = 0; j < x.n; j++)
+		{
+			fscanf_s(f, "%d", &x.mtk[i][j]);
+		}
+	}
+	fclose(f);
+	return true;
+}
+void xuatMaTranKe(MaTranKe x) {
+	cout << "\n Gia tri cua ma tran la: ";
+	cout << "\n" << x.n<<endl;
+	for (int i = 0; i < x.n; i++){
+		for (int j = 0; j < x.n; j++){
+			cout << x.mtk[i][j]<<" ";
+		}
+		cout<< endl;
+	}
+}
+
+bool ghiMaTranKe(const char* NameFile, MaTranKe x) {
+	FILE* f;
+	fopen_s(&f, NameFile, "wt");
+	if (f == NULL)
+		return false;
+	fprintf_s(f, "%d\n", x.n);
+	for (int i = 0; i < x.n; i++) {
+		for (int j = 0; j < x.n; j++)
+		{
+			fprintf_s(f, "%d \t", x.mtk[i][j]);
+		}	fprintf_s(f, "\n");
+	}
+	fclose(f);
+	return true;
+}
+
+#include "ThuVien.h"
+
+int main() {
+	MaTranKe x;
+	if (docMaTranKe("Text.txt", x) == true)
+		xuatMaTranKe(x);
+	else
+		cout << "\n Khong the doc duoc file !!!!!!!!!!!!!!!!";
+	cout << endl;
+	if (ghiMaTranKe("DoThi.txt", x) == true)
+		cout << "\nGhi Thanh Cong";
+	else
+		cout << "\n Ghi Khong Thanh Cong !!!!!!!!!!!!";
+}
